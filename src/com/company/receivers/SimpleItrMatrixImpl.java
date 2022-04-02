@@ -14,8 +14,8 @@ public class SimpleItrMatrixImpl implements Matrix{
     private double[] coefficients;
     private double[][] transformedMatrix;
     private double accuracy;
-    private double [] solution;
-    private double [] error;
+    private double[] solution;
+    private double[] error;
 
 
     public SimpleItrMatrixImpl(int size, double[][] matrix, double[] coefficients, double accuracy){
@@ -41,7 +41,8 @@ public class SimpleItrMatrixImpl implements Matrix{
                     File file = new File(sc.next());
                     sc = new Scanner(file);
                     break;
-                default: throw new UnexpectedException("Can not parse input option");
+                default:
+                    throw new UnexpectedException("Can not parse input option");
             }
         } catch (UnexpectedException | FileNotFoundException e) {
             e.printStackTrace();
@@ -178,14 +179,14 @@ public class SimpleItrMatrixImpl implements Matrix{
                         solution[l] = newApproxVector[l];
                     }
                     iteration++;
-                    boolean flag = true;
+                    boolean isErrorAccepted = true;
                     for (int k = 0; k < size; k++) {
                         if (error[k] > accuracy) {
-                            flag = false;
+                            isErrorAccepted = false;
                             break;
                         }
                     }
-                    if (flag) return iteration;
+                    if (isErrorAccepted) return iteration;
                 }
             }
         }
